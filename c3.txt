@@ -4,20 +4,33 @@ Aim - Implement algorithms to generate and verify message authentication codes (
  
 import hmac import hashlib 
  
-# Step 1: Enter message and secret key message = input("Enter the message: ") key = input("Enter the secret key: ") 
+# Step 1: Enter message and secret key
+message = input("Enter the message: ")
+key = input("Enter the secret key: ") 
  
-# Step 2: Convert into bytes message = message.encode() key = key.encode() 
+# Step 2: Convert into bytes
+message = message.encode()
+key = key.encode() 
  
-# Step 3: Generate MAC mac = hmac.new(key, message, hashlib.sha256).hexdigest() print("\nGenerated MAC:") print(mac) 
+# Step 3: Generate MAC
+mac = hmac.new(key, message, hashlib.sha256).hexdigest()
+print("\nGenerated MAC:") print(mac) 
  
-# Step 4: Enter received message and MAC verify_message = input("\nEnter message for verification: ") verify_mac = input("Enter MAC for verification: ") 
+# Step 4: Enter received message and MAC
+verify_message = input("\nEnter message for verification: ")
+verify_mac = input("Enter MAC for verification: ") 
  
-# Step 5: Convert received message into bytes verify_message = verify_message.encode() 
+# Step 5: Convert received message into bytes
+verify_message = verify_message.encode() 
  
-# Step 6: Generate MAC for received message new_mac = hmac.new( 
-    key, verify_message, hashlib.sha256 
-).hexdigest() 
+# Step 6: Generate MAC for received message
+new_mac = hmac.new(key, verify_message, hashlib.sha256).hexdigest() 
  
-# Step 7: Compare MACs if hmac.compare_digest(verify_mac, new_mac): 
-    print("\nMAC verification successful")     print("Message is authentic and has not been modified.") else: 
-    print("\nMAC verification failed")     print("Message may have been modified or MAC is incorrect.") 
+# Step 7: Compare MACs
+if hmac:
+    compare_digest(verify_mac, new_mac): 
+        print("\nMAC verification successful")    
+        print("Message is authentic and has not been modified.")
+else: 
+    print("\nMAC verification failed")
+    print("Message may have been modified or MAC is incorrect.") 

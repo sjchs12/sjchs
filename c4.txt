@@ -3,30 +3,43 @@ Title - Implementation of Diffie-Hellman Key Exchange Algorithm Using Python
 Aim - To implement the Diffie-Hellman key exchange algorithm to securely exchange a secret key between two entities over an insecure network. 
  
  
-# Public values p = 23 g = 5 
+# Public values
+p = 23 g = 5 
  
-# Alice's private key a = 6 
+# Alice's private key
+a = 6 
  
-# Bob's private key b = 15 
+# Bob's private key
+b = 15 
  
 # Alice calculates her public key 
-A	= pow(g, a, p) 
+A = pow(g, a, p) 
  
 # Bob calculates his public key 
-B	= pow(g, b, p) 
+B = pow(g, b, p) 
  
-# Alice calculates the shared secret key key_alice = pow(B, a, p) 
+# Alice calculates the shared secret key
+key_alice = pow(B, a, p) 
  
-# Bob calculates the shared secret key key_bob = pow(A, b, p) 
+# Bob calculates the shared secret key
+key_bob = pow(A, b, p) 
  
-# Display results print("Public prime (p) =", p) print("Public generator (g) =", g) 
+# Display results
+print("Public prime (p) =", p)
+print("Public generator (g) =", g) 
  
-print("\nAlice's private key =", a) print("Alice's public key =", A) 
+print("\nAlice's private key =", a)
+print("Alice's public key =", A) 
  
-print("\nBob's private key =", b) print("Bob's public key =", B) 
+print("\nBob's private key =", b)
+print("Bob's public key =", B) 
  
-print("\nAlice's shared secret key =", key_alice) print("Bob's shared secret key =", key_bob) 
+print("\nAlice's shared secret key =", key_alice)
+print("Bob's shared secret key =", key_bob) 
  
-# Verify the keys if key_alice == key_bob: 
-    print("\nKey exchange successful!")     print("Both parties have the same secret key.") else: 
+# Verify the keys
+if key_alice == key_bob: 
+    print("\nKey exchange successful!")
+    print("Both parties have the same secret key.")
+else: 
     print("\nKey exchange failed!") 

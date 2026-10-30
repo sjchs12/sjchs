@@ -42,22 +42,29 @@ import heapq
     'Vaslui': 199, 'Iasi': 226, 'Neamt': 234 
 } 
  
-def a_star_search(graph, heuristic, start, goal): 
-    open_list = []     heapq.heappush(open_list, (heuristic[start], 0, start, [start]))     best_cost = {start: 0} 
+def a_star_search(graph, heuristic, start, goal):
+    open_list = []
+    heapq.heappush(open_list, (heuristic[start], 0, start, [start]))
+    best_cost = {start: 0} 
  
     while open_list: 
         f, g, city, path = heapq.heappop(open_list) 
  
         if g != best_cost.get(city): 
-            continue 
-         if city == goal:             return path, g         for neighbor, distance in graph[city].items(): 
+            continue
+        
+        if city == goal:
+            return path, g
+        
+        for neighbor, distance in graph[city].items():
             new_cost = g + distance 
- 
-            if new_cost < best_cost.get(neighbor, float('inf')): 
-                best_cost[neighbor] = new_cost                 new_f = new_cost + heuristic[neighbor] 
- 
-                heapq.heappush(                     open_list, 
-                    (new_f, new_cost, neighbor, path + [neighbor]) 
+            
+            if new_cost < best_cost.get(neighbor, float('inf')):
+                best_cost[neighbor] = new_cost
+                new_f = new_cost + heuristic[neighbor]
+                
+                heapq.heappush(
+                    open_list,(new_f, new_cost, neighbor, path + [neighbor]) 
                 ) 
  
     return None, float('inf') 
@@ -70,5 +77,7 @@ path, cost = a_star_search(
 ) 
  
 if path: 
-    print("Path found:", " -> ".join(path))     print("Total distance:", cost, "km") else: 
+    print("Path found:", " -> ".join(path))
+    print("Total distance:", cost, "km")
+else: 
     print("No path found.") 

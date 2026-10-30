@@ -2,29 +2,49 @@ Aim - 1.To implement the Decision Tree Learning algorithm for a given dataset.
 2.To evaluate the accuracy and effectiveness of the decision tree on test data. 
 3.To visualize and interpret the generated decision tree. 
  
-import numpy as np import pandas as pd import matplotlib.pyplot as plt 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt 
  
-from sklearn.tree import DecisionTreeClassifier, plot_tree from sklearn.model_selection import train_test_split 
-from sklearn.metrics import accuracy_score from sklearn.datasets import load_iris 
+from sklearn.tree import DecisionTreeClassifier, plot_tree from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score from sklearn.datasets import load_iris
  
-# Load the Iris dataset iris = load_iris(as_frame=True) data = iris.frame 
+# Load the Iris dataset
+iris = load_iris(as_frame=True)
+data = iris.frame 
  
-# Separate features and target X = data.drop("target", axis=1) y = data["target"] 
+# Separate features and target
+X = data.drop("target", axis=1)
+y = data["target"] 
  
 # Split the dataset into training and testing sets 
-X_train, X_test, y_train, y_test = train_test_split(     X, y,     test_size=0.2,     random_state=42 
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42 
 ) 
  
-# Create and train the decision tree clf = DecisionTreeClassifier(random_state=42) clf.fit(X_train, y_train) 
+# Create and train the decision tree
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train) 
  
-# Predict the test data y_pred = clf.predict(X_test) 
+# Predict the test data
+y_pred = clf.predict(X_test) 
  
-# Calculate accuracy accuracy = accuracy_score(y_test, y_pred) print(f"Accuracy: {accuracy:.2f}") 
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}") 
  
-# Visualize the decision tree plt.figure(figsize=(12, 8)) 
+# Visualize the decision tree
+plt.figure(figsize=(12, 8)) 
  
 plot_tree( 
-    clf,     filled=True,     feature_names=X.columns,     class_names=iris.target_names,     rounded=True 
+    clf,
+    filled=True,
+    feature_names=X.columns,
+    class_names=iris.target_names,
+    rounded=True 
 ) 
  
-plt.title("Decision Tree Visualization") plt.show() 
+plt.title("Decision Tree Visualization")
+plt.show() 

@@ -19,9 +19,14 @@ visited = [] q = []
 def bfs(graph, visited, node): 
     visited.append(node)     q.append(node) 
  
-    while q:         m = q.pop(0)         print(m) 
+    while q:
+        m = q.pop(0)
+        print(m) 
  
-        for n in graph[m]:             if n not in visited:                 visited.append(n)                 q.append(n) 
+        for n in graph[m]:
+            if n not in visited:
+                visited.append(n)
+                q.append(n) 
  
 bfs(graph, visited, '5') 
  
@@ -44,8 +49,12 @@ def dfs(graph, start):
     while stack: 
         node = stack.pop() 
  
-        if node not in visited:             print(node)             visited.add(node) 
+        if node not in visited:
+            print(node)
+            visited.add(node) 
  
-            for neighbor in reversed(graph[node]):                 if neighbor not in visited:                     stack.append(neighbor) 
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor) 
  
 dfs(graph, '5') 

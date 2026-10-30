@@ -4,8 +4,12 @@ Program 1: Caesar Cipher (Substitution Cipher)
  
 def encryption(text, shift): 
     result = ""     for ch in text: 
-        if ch.isalpha():             if ch.isupper(): 
-                result += chr((ord(ch) - 65 + shift) % 26 + 65)             else:                 result += chr((ord(ch) - 97 + shift) % 26 + 97)         else: 
+        if ch.isalpha():
+            if ch.isupper():
+                result += chr((ord(ch) - 65 + shift) % 26 + 65)
+            else:
+                result += chr((ord(ch) - 97 + shift) % 26 + 97)
+        else:
             result += ch     return result 
  
  
@@ -13,11 +17,14 @@ def decryption(text, shift):
     return encryption(text, -shift) 
  
  
-message = input("Enter Message: ") shift = int(input("Enter shift value: ")) 
+message = input("Enter Message: ")
+shift = int(input("Enter shift value: ")) 
  
-cipher = encryption(message, shift) print("Encrypted message:", cipher) 
+cipher = encryption(message, shift)
+print("Encrypted message:", cipher) 
  
-plain = decryption(cipher, shift) print("Decrypted message:", plain) 
+plain = decryption(cipher, shift)
+print("Decrypted message:", plain) 
  
  
 Program 2: Columnar Transposition Cipher 
@@ -25,14 +32,25 @@ Program 2: Columnar Transposition Cipher
 import math 
  
 def encrypt(message, key): 
-    message = message.replace(" ", "")     rows = math.ceil(len(message) / key)     matrix = []     index = 0 
+    message = message.replace(" ", "")
+    rows = math.ceil(len(message) / key)
+    matrix = []
+    index = 0 
  
     for i in range(rows): 
-        row = []         for j in range(key):             if index < len(message): 
-                row.append(message[index])             else: 
-                row.append('X')             index += 1         matrix.append(row) 
- 
-    cipher = ""     for j in range(key):         for i in range(rows):             cipher += matrix[i][j] 
+        row = []
+        for j in range(key):
+            if index < len(message):
+                row.append(message[index])
+            else:
+                row.append('X')
+            index += 1
+        matrix.append(row) 
+    
+    cipher = ""
+    for j in range(key):
+        for i in range(rows):
+            cipher += matrix[i][j] 
  
     return cipher 
  
@@ -41,15 +59,24 @@ def decrypt(cipher, key):
     rows = math.ceil(len(cipher) / key) 
     matrix = [["" for j in range(key)] for i in range(rows)] 
  
-    index = 0     for j in range(key):         for i in range(rows): 
-            matrix[i][j] = cipher[index]             index += 1 
- 
-    message = ""     for i in range(rows):         for j in range(key): 
+    index = 0
+    for j in range(key):
+        for i in range(rows):
+            matrix[i][j] = cipher[index]
+            index += 1 
+    
+    message = ""
+    for i in range(rows):
+        for j in range(key):
             message += matrix[i][j] 
  
     return message.rstrip('X') 
  
  
-message = input("Enter message: ") key = int(input("Enter key (columns): ")) 
+message = input("Enter message: ")
+key = int(input("Enter key (columns): ")) 
  
-cipher = encrypt(message, key) print("Encrypted message:", cipher) plain = decrypt(cipher, key) print("Decrypted message:", plain) 
+cipher = encrypt(message, key)
+print("Encrypted message:", cipher)
+plain = decrypt(cipher, key)
+print("Decrypted message:", plain) 

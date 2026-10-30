@@ -4,29 +4,46 @@ Aim - To simulate secure IP communication using Python by encrypting a message a
 Terminal - pip install cryptography 
  
  
-from cryptography.fernet import Fernet import hashlib import hmac 
+from cryptography.fernet import Fernet
+import hashlib
+import hmac 
  
-# Generate encryption key key = Fernet.generate_key() cipher = Fernet(key) 
+# Generate encryption key
+key = Fernet.generate_key()
+cipher = Fernet(key) 
  
-# Secret key for HMAC secret_key = b"mysecretkey" 
+# Secret key for HMAC
+secret_key = b"mysecretkey" 
  
-# Sender's side message = "This is a secure IPSec communication." data = message.encode() 
+# Sender's side
+message = "This is a secure IPSec communication."
+data = message.encode() 
  
-# Encrypt the message encrypted_data = cipher.encrypt(data) 
+# Encrypt the message
+encrypted_data = cipher.encrypt(data) 
  
-# Generate HMAC mac = hmac.new(     secret_key, encrypted_data, hashlib.sha256 
-).hexdigest() 
+# Generate HMAC
+mac = hmac.new(secret_key, encrypted_data, hashlib.sha256).hexdigest() 
  
-print("Original message:", message) print("\nEncrypted message:", encrypted_data.decode()) print("\nHMAC:") print(mac) 
+print("Original message:", message)
+print("\nEncrypted message:", encrypted_data.decode())
+print("\nHMAC:")
+print(mac) 
  
-# Receiver's side received_data = encrypted_data received_mac = mac 
+# Receiver's side
+received_data = encrypted_data
+received_mac = mac 
  
-# Generate HMAC for received data new_mac = hmac.new( 
-    secret_key, received_data, hashlib.sha256 
-).hexdigest() 
+# Generate HMAC for received data
+new_mac = hmac.new(secret_key, received_data, hashlib.sha256).hexdigest() 
  
-# Verify HMAC before decryption if hmac.compare_digest(received_mac, new_mac): 
+# Verify HMAC before decryption 
+if hmac.compare_digest(received_mac, new_mac): 
     print("\nHMAC verification: Successful") 
  
-    # Decrypt the message     decrypted_data = cipher.decrypt(received_data)     print("Decrypted message:", decrypted_data.decode()) else: 
-    print("\nHMAC verification: Failed")     print("Message may have been modified.") 
+    # Decrypt the message
+    decrypted_data = cipher.decrypt(received_data)
+    print("Decrypted message:", decrypted_data.decode())
+else: 
+    print("\nHMAC verification: Failed")
+    print("Message may have been modified.") 
