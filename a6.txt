@@ -1,0 +1,27 @@
+Aim - 1.To implement the AdaBoost classification algorithm using Python. 
+2.To train an AdaBoost classifier on the Iris dataset. 
+3.To predict the class labels for test data and evaluate the model's accuracy. 
+ 
+Terminal - pip install scikit-learn 
+ 
+from sklearn.ensemble import AdaBoostClassifier from sklearn import datasets from sklearn.model_selection import train_test_split from sklearn import metrics 
+ 
+# Load Iris dataset iris = datasets.load_iris() 
+ 
+# Separate features and target X = iris.data y = iris.target 
+ 
+# Split into training and testing sets 
+X_train, X_test, y_train, y_test = train_test_split( 
+    X, y, test_size=0.3, random_state=42 
+) 
+ 
+# Create AdaBoost classifier abc = AdaBoostClassifier(     n_estimators=50,     learning_rate=1.0,     random_state=42 
+) 
+ 
+# Train the AdaBoost classifier model = abc.fit(X_train, y_train) 
+ 
+# Print actual output print("Actual output:", y_test) 
+ 
+# Predict the response for test dataset y_pred = model.predict(X_test) print("Prediction:", y_pred) 
+ 
+# Calculate and print accuracy accuracy = metrics.accuracy_score(y_test, y_pred) print("Accuracy:", accuracy) 

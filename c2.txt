@@ -1,0 +1,42 @@
+Title - RSA Encryption and Decryption Using Python 
+ 
+Aim - To implement the RSA algorithm for public key encryption and decryption using Python and understand its properties and security considerations. 
+ 
+ 
+import math 
+ 
+# Step 1: Select two prime numbers p = 61 q = 53 
+ 
+# Step 2: Calculate n n = p * q 
+ 
+# Step 3: Calculate Euler's Totient phi = (p - 1) * (q - 1) 
+ 
+# Step 4: Select public key e e = 17 
+ 
+# Check that e and phi are relatively prime if math.gcd(e, phi) != 1: 
+    print("Invalid value of e")     exit() 
+ 
+# Step 5: Calculate private key d d = pow(e, -1, phi) 
+ 
+# Display keys print("Public key:", (e, n)) print("Private key:", (d, n)) 
+ 
+# Step 6: Take message from user message = input("Enter a message (single character): ") 
+ 
+if len(message) != 1: 
+    print("Please enter exactly one character.") 
+    exit() 
+ 
+# Convert message into a number m = ord(message[0]) 
+ 
+if m >= n:     print("Message number must be less than n.")     exit() 
+ 
+# Step 7: Encryption c = pow(m, e, n) 
+ 
+print("Original message:", message) print("Message Number:", m) print("Encrypted message:", c) 
+ 
+# Step 8: Decryption decrypted_m = pow(c, d, n) 
+ 
+# Convert number back to character decrypted_message = chr(decrypted_m) 
+ 
+print("Decrypted message:", decrypted_message) 
+ 

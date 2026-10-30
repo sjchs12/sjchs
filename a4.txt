@@ -1,0 +1,26 @@
+Aim -1.To implement the SVM algorithm for binary classification. 
+2.To train an SVM model using a given dataset. 
+3.To evaluate the model's performance on test data. 
+ 
+import numpy as np import pandas as pd import matplotlib.pyplot as plt 
+ 
+from sklearn.svm import SVC 
+from sklearn.model_selection import train_test_split from sklearn.metrics import accuracy_score from sklearn.datasets import load_breast_cancer 
+ 
+# Load the dataset 
+data = load_breast_cancer(as_frame=True).frame 
+ 
+# Separate features and target X = data.drop("target", axis=1) y = data["target"] 
+ 
+# Split the dataset 
+X_train, X_test, y_train, y_test = train_test_split(     X, y,     test_size=0.2,     random_state=42,     stratify=y 
+) 
+ 
+# Create and train the SVM model svm_classifier = SVC(kernel="linear") svm_classifier.fit(X_train, y_train) 
+ 
+# Predict the test data 
+y_pred = svm_classifier.predict(X_test) 
+ 
+# Calculate accuracy accuracy = accuracy_score(y_test, y_pred) 
+ 
+print("Actual output:", list(y_test)) print("Predicted output:", list(y_pred)) print(f"Accuracy: {accuracy:.2f}") 

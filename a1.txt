@@ -1,0 +1,51 @@
+Aim - 1. To implement the Breadth First Search (BFS) algorithm to solve a given problem. 
+ 
+2.	To implement the Iterative Depth First Search (DFS) algorithm to solve the same problem. 
+ 
+3.	To compare the performance and efficiency of both algorithms. 
+ 
+Program 1: Breadth First Search (BFS) 
+ 
+graph = { 
+    '5': ['3', '7'], 
+    '3': ['2', '4'], 
+    '7': ['8'],     '2': [], 
+    '4': ['8'], 
+    '8': [] 
+} 
+ 
+visited = [] q = [] 
+ 
+def bfs(graph, visited, node): 
+    visited.append(node)     q.append(node) 
+ 
+    while q:         m = q.pop(0)         print(m) 
+ 
+        for n in graph[m]:             if n not in visited:                 visited.append(n)                 q.append(n) 
+ 
+bfs(graph, visited, '5') 
+ 
+ 
+Program 2: Iterative Depth First Search (DFS) 
+ 
+graph = { 
+    '5': ['3', '7'], 
+    '3': ['2', '4'], 
+    '7': ['8'],     '2': [], 
+    '4': ['8'], 
+    '8': [] 
+} 
+ 
+visited = set() 
+ 
+def dfs(graph, start): 
+    stack = [start] 
+ 
+    while stack: 
+        node = stack.pop() 
+ 
+        if node not in visited:             print(node)             visited.add(node) 
+ 
+            for neighbor in reversed(graph[node]):                 if neighbor not in visited:                     stack.append(neighbor) 
+ 
+dfs(graph, '5') 
